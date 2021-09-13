@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 public class MessagePostDto {
     private Long destinationNumber;
     private String message;
-    private Integer messageTime;
+    private Long messageTime;
 }

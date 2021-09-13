@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MessageGetDto {
     private Long messageId;
-    private Integer destinationNumber;
+    private Long destinationNumber;
     private String message;
-    private Integer messageTime;
+    private Long messageTime;
     private Boolean messageStatus;
 }

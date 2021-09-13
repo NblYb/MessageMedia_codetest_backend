@@ -5,6 +5,7 @@ import com.codingtest.message.services.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,12 +17,8 @@ public class AccountController {
     @Autowired
     private final AccountService accountService;
 
-    @GetMapping
-    public ResponseEntity<List<AccountGetDto>> getAll(){
-        return ResponseEntity.ok(accountService.getAllAccounts());
-    }
-
     @GetMapping("/{username}")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     public ResponseEntity<AccountGetDto> getByUsername(@PathVariable String username){
         return ResponseEntity.ok(accountService.findAccountByUsername(username));
     }
@@ -37,10 +34,10 @@ public class AccountController {
         }
     }
 
-    @PutMapping("/{username}")
-    public ResponseEntity<AccountGetDto> changePassword(@PathVariable String username,
-                                                        @RequestParam("encodedpassword") final String encodedPassoword){
-        AccountGetDto accountGetDto = accountService.changePassword(username, encodedPassoword);
+    @PutMapping
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+    public ResponseEntity<AccountGetDto> changePassword(@RequestBody AccountPutDto accountPutDto){
+        AccountGetDto accountGetDto = accountService.changePassword(accountPutDto);
         return ResponseEntity.ok(accountGetDto);
     }
 

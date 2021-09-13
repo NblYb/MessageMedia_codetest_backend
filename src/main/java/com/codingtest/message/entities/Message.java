@@ -17,13 +17,13 @@ public class Message {
     private Long messageId;
 
     @Column(name = "destination_number", nullable = false)
-    private Integer destinationNumber;
+    private Long destinationNumber;
 
     @Column(name = "message", nullable = false)
     private String message;
 
     @Column(name = "message_time", nullable = false)
-    private Integer messageTime;
+    private Long messageTime;
 
     @Column(name = "message_status", nullable = false)
     private Boolean messageStatus;

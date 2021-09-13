@@ -20,8 +20,8 @@ import java.util.stream.Stream;
 public class AccountService {
 
     private final AccountRepository accountRepository;
-    private final AuthorityRepository authorityRepository;
     private final AccountMapper accountMapper;
+    private final AuthorityRepository authorityRepository;
 
     public AccountGetDto createAccount(AccountPostDto accountPostDto){
         Account account = accountMapper.toEntity(accountPostDto);
@@ -35,30 +35,15 @@ public class AccountService {
         return accountMapper.fromEntity(account);
     }
 
-    public List<AccountGetDto> getAllAccounts(){
-        return accountRepository.findAll().stream()
-                .map(accountMapper::fromEntity)
-                .collect(Collectors.toList());
-    }
-
-    public String findUsernameById(Long accountId){
-        Account account = accountRepository.getById(accountId);
-        return account.getUsername();
-    }
-
-    public AccountGetDto changePassword(String userName, String encodedPassowrd) {
+    public AccountGetDto changePassword(AccountPutDto accountPutDto) {
         Account account = new Account();
-        AccountGetDto previousAccount = findAccountByUsername(userName);
+        AccountGetDto previousAccount = findAccountByUsername(accountPutDto.getUsername());
         account.setAccountId(previousAccount.getAccountId());
         account.setUsername(previousAccount.getUsername());
-        account.setEncodedPassword(encodedPassowrd);
+        account.setEncodedPassword(accountPutDto.getEncodedPassword());
         return accountMapper.fromEntity(accountRepository.save(account));
     }
 
-    public Set<Authority> findAuthoritiesByAccountId(Long accountId){
-        Account account = accountRepository.getById(accountId);
-        return account.getAuthorities();
-    }
 
     public Set<Authority> getUserAuthority(){
         return Stream.of(authorityRepository.getById(1L)).collect(Collectors.toSet());
