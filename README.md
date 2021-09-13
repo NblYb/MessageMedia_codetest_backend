@@ -12,8 +12,6 @@
 ## Topics
 1. [How to run this application](#How-to-run-this-application)
 2. [How to access the spring boot restful application](#How-to-access-the-spring-boot-restful-application)
-3. [Database structure](#Database-structure)
-4. [Advantages of this application](#Advantages-of-this-application)
 
 ### This is the springBoot based RESTful API. It supports the below functions:
 
