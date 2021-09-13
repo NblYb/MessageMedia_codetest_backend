@@ -9,10 +9,6 @@
 * MockMvc
 * Flyway
 
-## Topics
-1. [How to run this application](#How-to-run-this-application)
-2. [How to access the spring boot restful application](#How-to-access-the-spring-boot-restful-application)
-
 ### This is the springBoot based RESTful API. It supports the below functions:
 
 * Create an account
